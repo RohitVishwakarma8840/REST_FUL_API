@@ -3,8 +3,17 @@ const app=express();
 
 const PORT=3000;
 
-app.get('/user',(req,res)=>{
-    res.send("hello world by rohit");
+
+// Mimic the database using the array 
+
+let blogList=[];
+
+app.get('/blogs',(req,res)=>{
+
+    return res.status(200).json({
+    data: blogList,
+    success: true
+    });
 });
 
 app.listen(PORT,()=>{
