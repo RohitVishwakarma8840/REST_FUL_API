@@ -14,15 +14,33 @@ app.use(bodyParser.json());
 
 let blogList=[];
 
+
+function logger(req,res,next){
+  console.log(req.url);
+  console.log(req.body);
+  next();
+
+}
+
+function isAuthenticated(req,res,next){
+  console.log("user is Authenticated");
+  next();
+
+}
+
 // app.get('/getall',(req,res)=>{
 //     res.send(blogList);
 // });
 
-app.get('/blogs',(req,res)=>{
-
+app.get('/blogs',logger,isAuthenticated , (req,res)=>{
+    
+   console.log("hitting");
     return res.status(404).json({
     data: blogList,
     success: true,
+    id:req.params.id,
+//    blogList:blogList,    
+
     });
 });
 
